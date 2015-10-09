@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class RectangleCalculator extends AppCompatActivity {
 
@@ -29,13 +30,16 @@ public class RectangleCalculator extends AppCompatActivity {
         calButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                double width = Double.parseDouble(WIDTH.getText().toString());
-                double height = Double.parseDouble(HEIGHT.getText().toString());
-                areaResult = (width * height);
-                periResult = ((width + height) / 2);
-                TextView result = (TextView) findViewById(R.id.resultText);
-                result.setText("Area is: " + areaResult + "\n" + "Perimeter is: " + periResult);
-
+                if (WIDTH.getText().toString().length() == 0 || HEIGHT.getText().toString().length() == 0) {
+                    Toast.makeText(v.getContext(), "input height or width required", Toast.LENGTH_LONG).show();
+                } else {
+                    double width = Double.parseDouble(WIDTH.getText().toString());
+                    double height = Double.parseDouble(HEIGHT.getText().toString());
+                    areaResult = (width * height);
+                    periResult = ((width + height) / 2);
+                    TextView result = (TextView) findViewById(R.id.resultText);
+                    result.setText("Area is: " + areaResult + "\n" + "Perimeter is: " + periResult);
+                }
             }
         });
     }
